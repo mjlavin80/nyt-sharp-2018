@@ -1,2 +1,3 @@
-# nyt-sharp-2018
-slides for SHARP paper
+# Slides for SHARP paper, July 2018
+
+## Link to Slides: https://mjlavin80.github.io/nyt-sharp-2018/

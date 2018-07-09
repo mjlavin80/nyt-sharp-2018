@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Historic Book Reviews
+</title>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+
+    th {color: white; background-color: black; padding-top: 7px; padding-bottom: 7px;}
+    td {padding: 3px; }
+    table { width: 100%; border-collapse: collapse;}
+    table.dataframe { 
+      width: 80%;
+      margin-left: 50px;
+      margin-top: 25px; 
+    }
+    table.dataframe>thead>tr>th {
+      border-color: black; 
+      background: linear-gradient(#1B1B1B, black); 
+    }
+    table.term-groups {
+      margin-top: 25px; 
+      margin-bottom: 25px; 
+    }
+    table.term-groups>tbody>tr>th {
+      border-color: black;
+      background: linear-gradient(#1B1B1B, black); 
+      text-align: left;
+      padding: 6px;
+      width: 25%;
+    }
+
+    table.term-groups>tbody>tr>td {
+      border-color: black;
+      text-align: left;
+      padding: 6px;
+    } 
+
+    td, th {border: 1px solid black; font-size: 95%; text-align: center;
+    }
+    body {
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      color: rgba(34,34,34,.77);
+
+    }
+    
+    h1 {
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: black;
+      font-variant: small-caps;
+    }
+    h2 {
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      font-weight: normal;
+      color: black;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h3, h4 {
+      
+      color: rgba(34,34,34,.77);
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h5 {
+        
+        font-weight: normal;
+        color: black;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    p {
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+    .youtube {
+      width: 100%;
+      height: 45vh;
+    }
+    .middle {
+      background: linear-gradient(#8D8B8B, #e6e6e6);
+
+    }
+    .table-wrapper {
+      overflow-y: scroll;
+      width: 70%;
+      height: 100%;
+      margin-left: 10px;
+      /*display: block;
+      */
+    }
+    .remark-slide-content {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    .remark-slide-content h1 {
+        font-size: 45px;
+    }
+    .remark-slide-content h2 {
+        font-size: 32px;
+    }
+    .remark-slide-content h3 {
+        font-size: 28px;
+    }
+    .remark-slide-content h4,h5 {
+        font-size: 22px;
+    }
+    img.hist {
+      width:55%;
+    }
+    img.review {
+      margin: auto;
+      display: block;
+    }
+    h2.performance, h4.performance {
+      text-align:center;
+      margin-bottom: 25px;
+    }
+    div.performance {
+      padding-bottom:15px;
+      padding-top:15px; 
+      background-position: right center;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    
+    }
+    #stopwords {
+      background-image: url(figures/stopwords_cm.png); 
+    }
+    #stop_pro {
+      background-image: url(figures/stop_pro_cm.png);
+    }
+    #stop_pro_names {
+      background-image: url(figures/stop_pro_names_cm.png);
+    }
+    #sentiment_pos {
+      background-image: url(figures/sentiment_pos_cm.png); 
+    }
+    #sentiment_neg {
+      background-image: url(figures/sentiment_neg_cm.png); 
+    }
+    #sentiment_all {
+      background-image: url(figures/sentiment_all_cm.png); 
+    }
+    /* Chrome, Safari */
+    ::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+
+    }
+    ::-webkit-scrollbar-track-piece  {
+    background-color: white;
+    }
+    ::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    border-radius: 15px;
+    background-color: black;
+}
+  </style>
+  <script>
+
+  </script>
+</head>
+  <body>
+    <textarea id="source">
+
+class: middle
+
+# Computational Book History
+
+<br/>
+<br/>
+
+## A Pilot Study of <em>The New York Times</em><br/> and Early 20th-century Reading
+
+<br />
+## Examples from Reviews
+
+<br/>
+<br/>
+
+#### Matthew Lavin
+#### Clinical Assistant Professor of English
+#### Director of Digital Media Lab
+#### University of Pittsburgh
+#### February 2018
+
+---
+class: middle
+
+<h2 class="performance">Archetypal Review</h2>
+
+<img class="review" src="../figures/italian-romance-4fc039f645c1498b0d1e1498.png" />
+
+- Author is perceived female by reviewer, machine model guesses female 
+- Positive sentiment features
+
+---
+class: middle
+
+<h2 class="performance">Archetypal Review</h2>
+
+<img class="review" src="../figures/kings-garden-4fc051cf45c1498b0d24ad60.png" />
+
+- Author is perceived female by reviewer, machine model guesses female 
+- All sentiment features
+
+---
+class: middle
+
+<h2 class="performance">Archetypal Review</h2>
+
+<img width="65%" class="review" src="../figures/kingdom-4fc0532f45c1498b0d2519e2.png" />
+
+- Author is perceived male by reviewer, machine model guesses male 
+- Stopwords, pronouns, and forenames removed
+
+---
+class: middle
+
+<h2 class="performance">Archetypal Review</h2>
+
+<img width="50%" class="review" src="../figures/de-soto-4fc0499e45c1498b0d226d96.png" />
+
+- Author is perceived male by reviewer, machine model guesses male 
+- All sentiment features
+
+---
+class: middle
+
+<h2 class="performance">Outlier Review</h2>
+
+<img class="review" src="../figures/charles-ii-4fc0454f45c1498b0d212e17.png" />
+
+- Author is perceived female by reviewer, machine model guesses male 
+- Stopwords, pronouns, and forenames removed
+
+---
+class: middle
+
+<h2 class="performance">Outlier Review</h2>
+
+<img class="review" src="../figures/balloons-4fc03a7d45c1498b0d1e2e9c.png" />
+
+- Author is perceived female by reviewer, machine model guesses male 
+- Positive sentiment features
+
+---
+class: middle
+
+
+<h2 class="performance">Outlier Review</h2>
+
+<img class="review" src="../figures/modern-child-4fc0520a45c1498b0d24bb57.png" />
+
+- Author is perceived male by reviewer, machine model guesses female 
+- All sentiment features
+
+---
+class: middle
+
+
+<h2 class="performance">Outlier Review</h2>
+
+<img class="review" src="../figures/hyde-4fc049a045c1498b0d2270b2.png" />
+
+- Author is perceived male by reviewer, machine model guesses female 
+- Negative sentiment features
+
+---
+class: middle
+
+<h2 class="performance">Ambiguous Review</h2>
+
+<img class="review" src="../figures/violins-4fc048a645c1498b0d222de4.png" />
+
+- Author is perceived female by reviewer, machine model goes back and forth depending on the training set
+- Stopwords, pronouns, and forenames removed
+
+---
+class: middle
+
+<h2 class="performance">Ambiguous Review</h2>
+
+<img width="42%" class="review" src="../figures/peers-4fc0532b45c1498b0d251269.png" />
+
+- Author is perceived male by reviewer, machine model goes back and forth depending on the training set
+- Negative sentiment features
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Historic Book Reviews
+</title>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+
+    th {color: white; background-color: black; padding-top: 7px; padding-bottom: 7px;}
+    td {padding: 3px; }
+    table { width: 100%; border-collapse: collapse;}
+    table.dataframe { 
+      width: 80%;
+      margin-left: 50px;
+      margin-top: 25px; 
+    }
+    table.dataframe>thead>tr>th {
+      border-color: black; 
+      background: linear-gradient(#1B1B1B, black); 
+    }
+    table.term-groups {
+      margin-top: 25px; 
+      margin-bottom: 25px; 
+    }
+    table.term-groups>tbody>tr>th {
+      border-color: black;
+      background: linear-gradient(#1B1B1B, black); 
+      text-align: left;
+      padding: 6px;
+      width: 25%;
+    }
+
+    table.term-groups>tbody>tr>td {
+      border-color: black;
+      text-align: left;
+      padding: 6px;
+    } 
+
+    td, th {border: 1px solid black; font-size: 95%; text-align: center;
+    }
+    body {
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      color: rgba(34,34,34,.77);
+
+    }
+    
+    h1 {
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: black;
+      font-variant: small-caps;
+    }
+    h2 {
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      font-weight: normal;
+      color: black;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h3, h4 {
+      
+      color: rgba(34,34,34,.77);
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h5 {
+        
+        font-weight: normal;
+        color: black;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    p {
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+    .youtube {
+      width: 100%;
+      height: 45vh;
+    }
+    .middle {
+      background: linear-gradient(#8D8B8B, #e6e6e6);
+
+    }
+    .footer {
+      position: fixed;
+      color: black;
+      bottom: 30px;
+      margin-left: 25px;
+      margin-right: 155px;
+    }
+    .table-wrapper {
+      overflow-y: scroll;
+      width: 70%;
+      height: 100%;
+      margin-left: 10px;
+      /*display: block;
+      */
+    }
+    .remark-slide-content {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    .remark-slide-content h1 {
+        font-size: 45px;
+    }
+    .remark-slide-content h2 {
+        font-size: 32px;
+    }
+    .remark-slide-content h3 {
+        font-size: 28px;
+    }
+    .remark-slide-content h4,h5 {
+        font-size: 22px;
+    }
+    img.hist {
+      width:85%;
+    }
+    h2.performance, h4.performance, h3.performance {
+      text-align:center;
+      margin-bottom: 25px;
+    }
+    div.performance {
+      padding-bottom:15px;
+      padding-top:15px; 
+      background-position: right center;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    
+    }
+    
+    /* Chrome, Safari */
+    ::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+
+    }
+    ::-webkit-scrollbar-track-piece  {
+    background-color: white;
+    }
+    ::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    border-radius: 15px;
+    background-color: black;
+}
+  </style>
+  <script>
+
+  </script>
+</head>
+  <body>
+    <textarea id="source">
+
+class: middle
+
+# Large Scale Analysis of Historic Book Reviews: 
+
+<br/>
+<br/>
+
+## A Pilot Study of <em>The New York Times</em><br/> and Early 20th-century Reading
+
+<br/>
+<br/>
+
+#### Matthew Lavin
+#### Clinical Assistant Professor of English
+#### Director of Digital Media Lab
+#### University of Pittsburgh
+#### SHARP Conference, July 2018
+#### @mjlavin80 on Twitter
+
+---
+class: middle
+
+
+# Can machine learning predict the presumed gender of the book's author?
+
+- ### If so, what do the terms informing predictions tell us about the gendering of review language?
+- ### Do these findings extend prior scholarship on readership and reviews?
+
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+???
+
+- #### What are the superficial features that predict presumed gender?
+- #### What are the topical features that predict presumed gender?
+- #### What are the evaluative features that predict presumed gender?
+- #### What hypotheses or research questions can we form for large scale analysis of gender and book reviews?  
+- #### How might these hypotheses speak to prior scholarship on readership and gender at this time?
+
+---
+class: middle
+
+# Prior Scholarship on Readership and Gender
+
+- ### History of Reading and Reviewing (Donoghue, Gavin, Hochman)
+- ### Cultural Capital (Bourdieu)
+- ### Middlebrow (Driscoll, Radway, Rubin)
+
+  - ### consumerism, instruction, morality, sentimentality, societal transformation, sophistication
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+???
+  
+- #### The Rise of Middlebrow
+- #### Reading for the Author (Hochman 2009)
+- #### Emergence of the "Restricted Field of Cultural Production" (Bourdieu, 1993; 1996)
+
+---
+class: middle
+# Study Design: Data
+<br/>
+
+- ### <em>The New York Times Book Review</em>
+- ### Picked a Year: 1905
+- ### Approximately 4,000 articles
+- ### Approximately 1,000 book reviews
+- ### Genders of reviewed work's author tagged "assumed male," "assumed female," "multi," or "unknown"
+- ### Assumed means assumed by the reviewer, not me
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+???
+
+  - #### Gold data 
+  - #### Metadata taken from <em>The New York Times</em> API
+  - #### After hand-coding categories of content, selected approximately 1,000 book reviews
+  - #### Each review focuses on a single book
+  - #### Genders of reviewed work's author tagged "assumed male," "assumed female," "multi," or "unknown"
+  - #### Coding reflects review's subjectivity, not objective gender or sex of reviewed author
+  - #### Reviews are often anonymous
+  - #### Not feasible to code genders of book reviewers
+
+---
+class: middle
+
+# Study Design: Methods
+
+- ### Text Processing
+ 
+- ### Machine Learning 
+
+- ### Shuffe and Repeat
+
+- ### Feature Selection
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+???
+ - #### OCR on NYT book reviews for all Labeled "assumed male" and "assumed female
+ - #### NLP to normalize text and lemmatize
+ - #### TF-IDF expressed in vector space
+ - #### Randomized partition to training and test with 200 test reviews
+ - #### Logistic regression (supervised, binary model) and evaluate accuracy
+ - #### Reshuffle training and test and repeat 999 more times, save results
+ - #### Do all above steps using six feature selection methods
+
+---
+class: middle 
+
+# Machine Learning Feature Selection Scenarios
+
+### 1. No terms removed
+
+### 2. Stopwords removed
+
+### 3. Stopwords, gender nouns, and titles removed
+
+### 4. Stopwords, gender nouns, titles, and common forenames removed</h3>
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class: middle
+
+<h2 class="performance">Summary of Model Performance</h2>
+
+<table class="table table-bordered table-hover table-condensed">
+<thead><tr><th title="Field #1">Scenario</th>
+<th title="Field #2">Features Removed</th>
+<th title="Field #3">F1 (F)</th>
+<th title="Field #4">Precision (F)</th>
+<th title="Field #5">Recall (F)</th>
+<th title="Field #6">F1 (M)</th>
+<th title="Field #7">Precision (M)</th>
+<th title="Field #8">Recall (M)</th>
+</tr></thead>
+<tbody><tr>
+<td align="right">1</td>
+<td style="text-align: left;">None</td>
+<td align="right">0.62</td>
+<td align="right">0.53</td>
+<td align="right">0.78</td>
+<td align="right">0.89</td>
+<td align="right">0.94</td>
+<td align="right">0.84</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td style="text-align: left;">Stopwords</td>
+<td align="right">0.59</td>
+<td align="right">0.48</td>
+<td align="right">0.81</td>
+<td align="right">0.87</td>
+<td align="right">0.95</td>
+<td align="right">0.8</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td style="text-align: left;">Stopwords, gender nouns, and gendered titles</td>
+<td align="right">0.49</td>
+<td align="right">0.38</td>
+<td align="right">0.72</td>
+<td align="right">0.8</td>
+<td align="right">0.92</td>
+<td align="right">0.72</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td style="text-align: left;">Stopwords, gender nouns, gendered titles, and forenames</td>
+<td align="right">0.47</td>
+<td align="right">0.36</td>
+<td align="right">0.72</td>
+<td align="right">0.79</td>
+<td align="right">0.92</td>
+<td align="right">0.7</td>
+</tr>
+</tbody></table>
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class: middle
+
+<h2 class="performance">Scenario 1: No terms removed</h2>
+
+<h3 class="performance">Overall Model Performance</h3>
+
+<img class="hist" src=" figures/all_cm.png"/>
+
+
+---
+class: middle
+
+<h2 class="performance">Scenario 1: No terms removed</h2>
+
+<h3 class="performance">Top Terms</h3>
+
+<table class="table table-bordered table-hover table-condensed">
+<thead><tr><th title="Field #1">Term</th>
+<th title="Field #2">Score</th>
+<th title="Field #3">Term</th>
+<th title="Field #4">Score</th>
+</tr></thead>
+<tbody><tr>
+<td>Her</td>
+<td align="right">2.08</td>
+<td>He</td>
+<td align="right">0.82</td>
+</tr>
+<tr>
+<td>She</td>
+<td align="right">1.75</td>
+<td>The</td>
+<td align="right">0.67</td>
+</tr>
+<tr>
+<td>Mrs</td>
+<td align="right">0.82</td>
+<td>Of</td>
+<td align="right">0.54</td>
+</tr>
+<tr>
+<td>Miss</td>
+<td align="right">0.73</td>
+<td>His</td>
+<td align="right">0.49</td>
+</tr>
+<tr>
+<td>Woman</td>
+<td align="right">0.48</td>
+<td>That</td>
+<td align="right">0.35</td>
+</tr>
+</tbody></table>
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class: middle
+
+<h2 class="performance">Scenario 2: Stopwords removed</h2>
+
+<h3 class="performance">Overall Model Performance</h3> 
+
+<img class="hist" src=" figures/stopwords_cm.png"/>
+
+
+---
+class: middle
+
+<h2 class="performance">Scenario 2: Stopwords removed</h2>
+
+<h3 class="performance">Top Terms</h3> 
+
+<table class="table table-bordered table-hover table-condensed">
+<thead><tr><th title="Field #1">Term</th>
+<th title="Field #2">Score</th>
+<th title="Field #3">Term</th>
+<th title="Field #4">Score</th>
+</tr></thead>
+<tbody><tr>
+<td>Mrs</td>
+<td align="right">1.14</td>
+<td>Volume</td>
+<td align="right">0.43</td>
+</tr>
+<tr>
+<td>Miss</td>
+<td align="right">0.98</td>
+<td>Prof</td>
+<td align="right">0.37</td>
+</tr>
+<tr>
+<td>Woman</td>
+<td align="right">0.65</td>
+<td>State</td>
+<td align="right">0.36</td>
+</tr>
+<tr>
+<td>Girl</td>
+<td align="right">0.47</td>
+<td>History</td>
+<td align="right">0.33</td>
+</tr>
+<tr>
+<td>Garden</td>
+<td align="right">0.43</td>
+<td>George</td>
+<td align="right">0.23</td>
+</tr>
+</tbody></table>
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class:middle
+
+<h2 class="performance">Scenario 3: Stopwords, gender nouns, and gendered titles removed</h2>
+
+<h3 class="performance">Overall Model Performance</h3> 
+
+<img class="hist" src=" figures/stop_pro_cm.png"/>
+
+---
+class: middle
+
+<h2 class="performance">Scenario 3: Stopwords, gender nouns, and gendered titles removed</h2>
+
+<h3 class="performance">Top Terms</h3>
+
+<table class="table table-bordered table-hover table-condensed">
+<thead><tr><th title="Field #1">Term</th>
+<th title="Field #2">Score</th>
+<th title="Field #3">Term</th>
+<th title="Field #4">Score</th>
+</tr></thead>
+<tbody><tr>
+<td>Garden</td>
+<td align="right">0.45</td>
+<td>Volume</td>
+<td align="right">0.43</td>
+</tr>
+<tr>
+<td>Life</td>
+<td align="right">0.44</td>
+<td>Prof</td>
+<td align="right">0.38</td>
+</tr>
+<tr>
+<td>Catherine</td>
+<td align="right">0.41</td>
+<td>State</td>
+<td align="right">0.37</td>
+</tr>
+<tr>
+<td>Love</td>
+<td align="right">0.38</td>
+<td>History</td>
+<td align="right">0.34</td>
+</tr>
+<tr>
+<td>Art</td>
+<td align="right">0.33</td>
+<td>Political</td>
+<td align="right">0.24</td>
+</tr>
+</tbody></table>
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class: middle
+
+# In Other Words
+
+- ### The 'superficial' layers of gender norming tells us more than one might think 
+- ### Author gender is almost always assigned in the review 
+- ### Often based on forename 
+- ### Female gendered pronouns predict gender much better than male gendered pronouns
+- ### Males are more readily associated with non-gendered function words
+- ### Gender labels are reinforced by titles and pronouns
+- ### Dr. and Prof., while not inherently gendered terms, almost always label men 
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+???
+Bourdieu on the habitus and hexis of gender
+
+---
+class: middle
+
+<h2 class="performance">Scenario 4: Stopwords, gender nouns, titles, and common forenames removed</h2>
+
+<h3 class="performance">Overall Model Performance</h3> 
+
+<img class="hist" src=" figures/stop_pro_names_cm.png"/>
+
+---
+class: middle
+
+<h2 class="performance">Scenario 4: Stopwords, gender nouns, titles, and common forenames removed</h2>
+
+<h3 class="performance">Top Terms</h3>
+
+<table class="table table-bordered table-hover table-condensed">
+<thead><tr><th title="Field #1">Term</th>
+<th title="Field #2">Score</th>
+<th title="Field #3">Term</th>
+<th title="Field #4">Score</th>
+</tr></thead>
+<tbody><tr>
+<td>Life</td>
+<td align="right">0.5</td>
+<td>Volume</td>
+<td align="right">0.46</td>
+</tr>
+<tr>
+<td>Garden</td>
+<td align="right">0.47</td>
+<td>Prof</td>
+<td align="right">0.4</td>
+</tr>
+<tr>
+<td>Story</td>
+<td align="right">0.36</td>
+<td>State</td>
+<td align="right">0.39</td>
+</tr>
+<tr>
+<td>Home</td>
+<td align="right">0.34</td>
+<td>History</td>
+<td align="right">0.35</td>
+</tr>
+<tr>
+<td>Marriage</td>
+<td align="right">0.34</td>
+<td>Political</td>
+<td align="right">0.25</td>
+</tr>
+</tbody></table>
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class: middle
+
+## Qualitative Categories as an Interpretive Tool
+
+- ### Meant as heuristic constructions, not fact (but not arbitrary either)
+- ### Individual terms acquire meaning in the context of an intricate network of term-topic associations
+- ### A word like 'beauty' may belong to an art and music category, or 'locales' and could be grouped with 'folk' and 'visit' under a category called 'Travel' 
+- ### Conceptions of adventure, geography, policy, and war have potential points of overlap
+- ### Another category called 'Education' could include words like 'history', 'prof', and 'shakespeare'
+- ### Even a word as concrete as 'garden' can refer to the arts, domesticity, travel, religion, or sophistication
+
+---
+class: middle
+
+## Female Label Predictors: Term Groupings (top 50 terms)
+
+<table class="term-groups">
+<tbody><tr>
+<th>Art and Music</th>
+<td>music, paint, rodin, sculpture, violin</td>
+</tr>
+<tr>
+<th>Author and Text</th>
+<td>author, heroine, letter, romance, story, tale, tragedy</td>
+</tr>
+<tr>
+<th>Domestic </th>
+<td>cook, family, home, marriage, widow, maid, child</td>
+</tr>
+<tr>
+<th>Feminized Virtues</th>
+<td>beauty, charm, pleasant, tender</td>
+</tr>
+<tr>
+<th>Geographic Locales</th>
+<td>chilean, constantino, italy, moran, siena, tuscany, venice</td>
+</tr>
+<tr>
+<th>Morality or Religion</th>
+<td>catholic, religious, reverend, saint, saintly, sin, thy, ye</td>
+</tr>
+<tr>
+<th>Royal Titles</th>
+<td>baroness, empress</td>
+</tr>
+<tr>
+<th>Uncategorized</th>
+<td>folk, garden, hear, life, little, nightingale, old, pink, spend, time, tin, vidal, young, visit</td>
+</tr>
+</tbody></table>
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+---
+class: middle 
+
+## Male Label Predictors: Term Groupings (top 50 terms)
+
+<table class="term-groups">
+<tbody><tr>
+<th>Author and Text</th>
+<td>article, edit, edition, editor, essay, note, poet, series, volume</td>
+</tr>
+<tr>
+<th>Conquest and War</th>
+<td>adventure, army, campaign, captain, expedition, force, indian, island, map, north, power, sea, ship, war</td>
+</tr>
+<tr>
+<th>Geographic Locales</th>
+<td>british, russia, russian</td>
+</tr>
+<tr>
+<th>Government and Policy</th>
+<td>constitution, governor, government, law, policy, political, service, state, unite</td>
+</tr>
+<tr>
+<th>Procedural</th>
+<td>divide, include, question, point, present</td>
+</tr>
+<tr>
+<th>Uncategorized</th>
+<td>animal, fact, game, great, history, important, numb, prof, shakespeare, university</td>
+</tr>
+</tbody>
+</table>
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+---
+class: middle
+
+# In Other Words
+
+- ### When the most superficially gendered features are removed, topical norms still predict gender 
+
+- ### Presumed author gender is strongly associated with topical (and some evaluative) vocabularies
+
+- ### Women seem to be writing about topics associated with morality, the home, and cultural sophistication (travel, royalty)
+
+- ### Men seem to be writing series or new editions about expeditions, power relations, academic topics 
+
+- ### Do reviews <em>reflect</em> gender norms for a book's topic, or do they <em>amplify or reinforce</em> these boundaries?
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class: middle
+
+## Conclusions: Returning to Middlebrow
+
+  - ### Reviews depict and/or reinforce women writing about morality, sentimentality, and sophistication
+  - ### Reviews depict and/or reinforce men writing about instruction, knowledge centers, and societal change (using political, not moral, vocabulary)
+  - ### Reviews may even 'police' topical boundaries and evaluate based partly on author's perceived gender 
+
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class: middle
+
+## Conclusions: Returning to Middlebrow
+
+- ### Emphasis of book topic may relate to what Rubin calls "the news approach" to writing book reviews
+- ### If women's writings related to morality topics address societal transformation, reviews don't emphasize it
+- ### Consumerism is either tacit or less gendered than other categories
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+---
+class: middle
+
+## Conclusions: New Questions
+
+- ### Do any of these observations hold true over a larger period of time?
+- ### Do any of these observations change over time?
+- ### Are these norms reresentative of reviews in other periodicals?
+- ### How can we compare book topic trends to reviewed work trends to better understand amplification?
+- ### Can we isolate and examine sentiment features? 
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class: middle
+
+## Conclusions: What's Next
+
+- ### Mark up summary and analysis sections
+- ### Fiction vs. nonfiction
+- ### Work published in 1905 vs. work reviewed
+- ### Scale up: more years, other periodicals
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+
+---
+class: middle
+
+# Thank you, SHARP colleagues! 
+
+# Thank you, Australia!
+
+<div class="footer">Tweet to @mjlavin80 so I can see your feedback!</div>
+---
+class: middle
+
+# Works Cited
+
+- #### Bourdieu, Pierre. <em>The Field of Cultural Production: Essays on Art and Literature.</em> Translated by Randal Johnson. Columbia UP, 1993.
+
+- #### Bourdieu, Pierre. <em>The Rules of Art: Genesis and Structure of the Literary Field.</em> Translated by Susan Emanuel. Stanford UP, 1996.
+
+- #### Donoghue, Frank <em>The Fame Machine: Book Reviewing and Eighteenth-Century Literary Careers.</em> Stanford UP, 1996. 
+
+- #### Driscoll, Beth. <em>The New Literary Middlebrow: Tastemakers and Reading in the Twenty-First Century.</em>Springer, 2014.
+
+- #### Gavin, Michael. <em>The Invention of English Criticism: 1650–1760.</em> Cambridge University Press, 2015.
+
+- #### Hochman, Barbara. <em>Getting at the Author: Reimagining Books and Reading in the Age of American Realism.</em> U of Massachusetts P, 2009.
+
+- #### Radway, Janice A. <em>A Feeling for Books: The Book-Of-The-Month Club, Literary Taste, and Middle-Class Desire.</em> U of North Carolina P, 1999.
+
+- #### Rubin, Joan Shelley. <em>The Making of Middlebrow Culture.</em> U of North Carolina P, 1992.
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
